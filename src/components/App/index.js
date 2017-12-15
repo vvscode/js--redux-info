@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./style.css";
+
+import { addItem, toggleCheck, addItems } from "../../actions/items";
 
 import Form from "../Form";
 import Filter from "../Filter";
@@ -12,40 +15,12 @@ class App extends Component {
   };
   constructor() {
     super();
-    getItems().then(items => {
-      console.log(items);
-      this.setState({
-        items
-      });
-    });
+    getItems().then(items => this.props.addItems(items));
   }
 
-  addTask = ({ title }) => {
-    this.setState({
-      items: [
-        {
-          id: Date.now(),
-          title,
-          date: new Date()
-        },
-        ...this.state.items
-      ]
-    });
-  };
+  addTask = ({ title }) => this.props.addItem({ title });
 
-  toggleChecked = id => {
-    this.setState({
-      items: this.state.items.map(
-        item =>
-          item.id !== id
-            ? item
-            : {
-                ...item,
-                done: !item.done
-              }
-      )
-    });
-  };
+  toggleChecked = id => this.props.toggleCheck(id);
 
   render() {
     return (
@@ -53,10 +28,21 @@ class App extends Component {
         We have {this.state.items.length} item(s)
         <Form onAdd={this.addTask} />
         <Filter />
-        <Table items={this.state.items} toggleChecked={this.toggleChecked} />
+        <Table items={this.props.items} toggleChecked={this.toggleChecked} />
       </div>
     );
   }
 }
 
-export default App;
+// https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+
+const mapStateToProps = (state /*, _ownProps*/) => ({
+  items: state.items
+});
+
+const mapDispatchToProps = {
+  addItem,
+  addItems,
+  toggleCheck
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
