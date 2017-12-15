@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./style.css";
 
-import { addItem, toggleCheck, addItems } from "../../actions/items";
+import { addItem, addItems } from "../../actions/items";
 
 import Form from "../Form";
 import Filter from "../Filter";
@@ -20,15 +20,13 @@ class App extends Component {
 
   addTask = ({ title }) => this.props.addItem({ title });
 
-  toggleChecked = id => this.props.toggleCheck(id);
-
   render() {
     return (
       <div>
         We have {this.state.items.length} item(s)
         <Form onAdd={this.addTask} />
         <Filter />
-        <Table items={this.props.items} toggleChecked={this.toggleChecked} />
+        <Table items={this.props.items} />
       </div>
     );
   }
@@ -42,7 +40,6 @@ const mapStateToProps = (state /*, _ownProps*/) => ({
 
 const mapDispatchToProps = {
   addItem,
-  addItems,
-  toggleCheck
+  addItems
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

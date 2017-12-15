@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { toggleCheck } from "../../actions/items";
 
 /*
  Если компонент не имеет своего состояния - используем pure component
@@ -10,7 +13,7 @@ const TableItem = ({
   description,
   date,
   importance,
-  toggleChecked
+  toggleCheck
 }) => (
   <tr>
     <td>{id}</td>
@@ -19,7 +22,7 @@ const TableItem = ({
         type="checkbox"
         checked={done}
         onChange={() => {
-          toggleChecked(id);
+          toggleCheck(id);
           return false;
         }}
       />
@@ -30,4 +33,7 @@ const TableItem = ({
   </tr>
 );
 
-export default TableItem;
+const mapDispatchToProps = {
+  toggleCheck
+};
+export default connect(undefined, mapDispatchToProps)(TableItem);

@@ -16,16 +16,13 @@ class Table extends Component {
     this.setState({ sortBy });
   };
   render() {
-    let toggleChecked = this.props.toggleChecked;
     let sortedItems = sortBy(this.props.items, this.state.sortBy);
 
     return (
       <table>
         <TableHeader onSort={this.handleSort} columns={columns} />
         <tbody>
-          {sortedItems.map(item => (
-            <TableItem key={item.id} {...item} toggleChecked={toggleChecked} />
-          ))}
+          {sortedItems.map(item => <TableItem key={item.id} {...item} />)}
         </tbody>
       </table>
     );
