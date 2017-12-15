@@ -1,3 +1,5 @@
+import { getItems } from "../apiWrapper";
+
 export const ADD_ITEM = "ADD_ITEM";
 export const TOGGLE_CHECK = "TOGGLE_CHECK";
 export const LOAD_ITEMS = "LOAD_ITEMS";
@@ -21,3 +23,6 @@ export const addItems = payload => ({
   type: LOAD_ITEMS,
   payload
 });
+
+export const loadItems = () => dispatch =>
+  getItems().then(items => dispatch(addItems(items)));

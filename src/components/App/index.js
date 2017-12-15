@@ -2,26 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./style.css";
 
-import { addItem, addItems } from "../../actions/items";
+import { loadItems } from "../../actions/items";
 
 import Form from "../Form";
 import Filter from "../Filter";
 import Table from "../Table";
-import { getItems } from "../../apiWrapper";
 
 class App extends Component {
-  state = {
-    items: []
-  };
-  constructor() {
-    super();
-    getItems().then(items => this.props.addItems(items));
+  constructor(...args) {
+    super(...args);
+    this.props.loadItems();
   }
 
   render() {
     return (
       <div>
-        We have {this.state.items.length} item(s)
+        We have {this.props.items.length} item(s)
         <Form />
         <Filter />
         <Table items={this.props.items} />
@@ -37,6 +33,6 @@ const mapStateToProps = (state /*, _ownProps*/) => ({
 });
 
 const mapDispatchToProps = {
-  addItems
+  loadItems
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
