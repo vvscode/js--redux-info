@@ -21,22 +21,17 @@ var btn = function btn() {
 
 так, что если React не будет определен - код работать не будет
 */
-import React from 'react';
+import React from "react";
 
-const TableHeader = ({onSort, columns}) => (
+const TableHeader = ({ onSort, columns }) => (
   <thead>
+    <tr>{columns.map(name => <th key={name}>{name}</th>)}</tr>
     <tr>
       {columns.map(name => (
-        <th>
-        {name}
-        </th>
-      ))}
-    </tr>
-    <tr>
-      {columns.map(name => (
-        <th>
-        <button onClick={() => onSort(name)}>^</button><br />
-        <button onClick={() => onSort(`-${name}`)}>v</button>
+        <th key={name}>
+          <button onClick={() => onSort(name)}>^</button>
+          <br />
+          <button onClick={() => onSort(`-${name}`)}>v</button>
         </th>
       ))}
     </tr>

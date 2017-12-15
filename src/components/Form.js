@@ -1,21 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-class Form extends Component  {
-  handleSubmit = (ev) => {
+class Form extends Component {
+  handleSubmit = ev => {
     ev.preventDefault();
     let title = this.refs.title.value;
-    if(title) {
+    if (title) {
       this.props.onAdd({
         title
       });
       ev.target.reset();
     }
-  }
+  };
   render() {
-    return (<form onSubmit={this.handleSubmit}>
-        <input ref="title" placeholder="Title" autofocus="true" />
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input ref="title" placeholder="Title" autoFocus="true" />
         <button>Add</button>
-    </form>);
+      </form>
+    );
   }
 }
 
