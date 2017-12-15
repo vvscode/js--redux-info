@@ -18,13 +18,11 @@ class App extends Component {
     getItems().then(items => this.props.addItems(items));
   }
 
-  addTask = ({ title }) => this.props.addItem({ title });
-
   render() {
     return (
       <div>
         We have {this.state.items.length} item(s)
-        <Form onAdd={this.addTask} />
+        <Form />
         <Filter />
         <Table items={this.props.items} />
       </div>
@@ -39,7 +37,6 @@ const mapStateToProps = (state /*, _ownProps*/) => ({
 });
 
 const mapDispatchToProps = {
-  addItem,
   addItems
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

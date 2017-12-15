@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { addItem } from "../actions/items";
+import { connect } from "react-redux";
 
 class Form extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
     let title = this.refs.title.value;
     if (title) {
-      this.props.onAdd({
+      this.props.addItem({
         title
       });
       ev.target.reset();
@@ -21,4 +23,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default connect(undefined, { addItem })(Form);
