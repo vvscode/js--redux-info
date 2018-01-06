@@ -1,8 +1,14 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "../reducers";
 import logger from "./logger";
 import async from "./async";
 
-const store = createStore(reducers, applyMiddleware(logger, async));
+const middlewares = [logger, async];
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(...middlewares))
+);
 
 export default store;
