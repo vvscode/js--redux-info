@@ -2,6 +2,7 @@
   "name": "js--redux-intro",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://vvscode.github.io/js--redux-info",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.2.0",
